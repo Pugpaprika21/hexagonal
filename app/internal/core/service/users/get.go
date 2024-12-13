@@ -34,7 +34,7 @@ func (u *usersSevice) GetUsers(ctx context.Context, req request.GetUsers) ([]res
 
 	sql.Stmt += " order by id desc"
 
-	rows, err := u.users.GetUsers(ctx, sql)
+	rows, err := u.repos.GetUsers(ctx, sql)
 	if err != nil {
 		return nil, err
 	}

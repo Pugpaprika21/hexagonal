@@ -16,7 +16,7 @@ func (u *userHandler) GetUsers(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, resp.Code(400).Message(err.Error()).Build())
 	}
 
-	data, err := u.users.GetUsers(c.Request().Context(), req)
+	data, err := u.serv.GetUsers(c.Request().Context(), req)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, resp.Code(500).Message(err.Error()).Build())
 	}

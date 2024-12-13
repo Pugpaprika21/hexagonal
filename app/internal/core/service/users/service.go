@@ -12,9 +12,9 @@ type IUsersSevice interface {
 }
 
 type usersSevice struct {
-	users users.IUserRepository
+	repos users.IUserRepository
 }
 
-func NewUsersSevice(users users.IUserRepository) IUsersSevice {
-	return &usersSevice{users: users}
+func NewUsersSevice(repos users.IUserRepository) IUsersSevice {
+	return &usersSevice{repos: repos}
 }

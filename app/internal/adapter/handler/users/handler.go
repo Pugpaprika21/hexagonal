@@ -11,9 +11,9 @@ type IUserHandler interface {
 }
 
 type userHandler struct {
-	users users.IUsersSevice
+	serv users.IUsersSevice
 }
 
-func NewUserHandler(users users.IUsersSevice) IUserHandler {
-	return &userHandler{users: users}
+func NewUserHandler(serv users.IUsersSevice) IUserHandler {
+	return &userHandler{serv: serv}
 }
