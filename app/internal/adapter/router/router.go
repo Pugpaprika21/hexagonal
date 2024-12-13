@@ -2,17 +2,19 @@ package router
 
 import (
 	"os"
+	"pugpaprika/app/internal/adapter/handler"
 
 	"github.com/labstack/echo/v4"
 )
 
 type appRouter struct {
-	server *echo.Echo
+	server  *echo.Echo
+	handler *handler.Handler
 }
 
-func NewRouter() *appRouter {
+func NewRouter(handler *handler.Handler) *appRouter {
 	server := echo.New()
-	return &appRouter{server: server}
+	return &appRouter{server: server, handler: handler}
 }
 
 func (r *appRouter) register() {
