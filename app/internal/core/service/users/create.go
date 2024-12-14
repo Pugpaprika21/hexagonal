@@ -6,7 +6,7 @@ import (
 	"pugpaprika/app/internal/core/schema"
 )
 
-func (u *usersSevice) CreateUsers(ctx context.Context, req []request.CreateUsersRows) error {
+func (u *usersService) CreateUsers(ctx context.Context, req []request.CreateUsersRows) error {
 	var parmObj []schema.CreateUsers
 	for _, rec := range req {
 		data := schema.CreateUsers{

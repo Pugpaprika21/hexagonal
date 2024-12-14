@@ -1,6 +1,7 @@
-package respone
+package response
 
 type GetUsers struct {
+	RowNum       int64  `json:"row_num"`
 	Address      string `json:"address"`
 	CreatedAt    string `json:"created_at"`
 	DateOfBirth  string `json:"date_of_birth"`
@@ -14,4 +15,5 @@ type GetUsers struct {
 	PhoneNumber  string `json:"phone_number"`
 	UpdatedAt    string `json:"updated_at"`
 	Username     string `json:"username"`
+	FullName     string `json:"full_name"`
 }

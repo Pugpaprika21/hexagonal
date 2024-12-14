@@ -3,14 +3,14 @@ package usersgroup
 import (
 	"context"
 	"pugpaprika/app/dto/request"
-	"pugpaprika/app/dto/respone"
+	"pugpaprika/app/dto/response"
 	"pugpaprika/app/pkg/sqlx"
 	"strings"
 )
 
-func (u *usersGroupService) GetUsersGroup(ctx context.Context, req request.GetUsersGroup) ([]respone.GetUsersGroup, error) {
+func (u *usersGroupService) GetUsersGroup(ctx context.Context, req request.GetUsersGroup) ([]response.GetUsersGroup, error) {
 	var sql sqlx.Sqlx
-	var resp []respone.GetUsersGroup
+	var resp []response.GetUsersGroup
 
 	sql.Stmt = "select * from users_group"
 	if req.ID != 0 {
@@ -44,7 +44,7 @@ func (u *usersGroupService) GetUsersGroup(ctx context.Context, req request.GetUs
 
 	if len(rows) > 0 {
 		for _, rec := range rows {
-			data := respone.GetUsersGroup{
+			data := response.GetUsersGroup{
 				ID:               int(rec.ID.Int64),
 				GroupCode:        rec.GroupCode.String,
 				GroupName:        rec.GroupName.String,

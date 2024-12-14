@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func (u *usersSevice) DeleteUsers(ctx context.Context, req request.DeleteUsers) error {
+func (u *usersService) DeleteUsers(ctx context.Context, req request.DeleteUsers) error {
 	var sql sqlx.Sqlx
 
 	sql.Stmt = "delete from users "

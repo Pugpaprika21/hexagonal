@@ -3,14 +3,14 @@ package usersgroupsetting
 import (
 	"context"
 	"pugpaprika/app/dto/request"
-	"pugpaprika/app/dto/respone"
+	"pugpaprika/app/dto/response"
 	"pugpaprika/app/pkg/sqlx"
 	"strings"
 )
 
-func (u *usersGroupSettingService) GetUsersGroupSetting(ctx context.Context, req request.GetUsersGroupSetting) ([]respone.GetUsersGroupSetting, error) {
+func (u *usersGroupSettingService) GetUsersGroupSetting(ctx context.Context, req request.GetUsersGroupSetting) ([]response.GetUsersGroupSetting, error) {
 	var sql sqlx.Sqlx
-	var resp []respone.GetUsersGroupSetting
+	var resp []response.GetUsersGroupSetting
 
 	sql.Stmt = "select * from users_group_setting"
 	if req.ID != 0 {
@@ -39,7 +39,7 @@ func (u *usersGroupSettingService) GetUsersGroupSetting(ctx context.Context, req
 
 	if len(rows) > 0 {
 		for _, rec := range rows {
-			data := respone.GetUsersGroupSetting{
+			data := response.GetUsersGroupSetting{
 				ID:        int(rec.ID.Int64),
 				UserID:    int(rec.UserID.Int64),
 				GroupID:   int(rec.GroupID.Int64),
@@ -54,9 +54,9 @@ func (u *usersGroupSettingService) GetUsersGroupSetting(ctx context.Context, req
 	return resp, nil
 }
 
-func (u *usersGroupSettingService) GetUsersGroupSettingByUserID(ctx context.Context, req request.GetUsersGroupSettingByUserID) ([]respone.GetUsersGroupSettingByUserID, error) {
+func (u *usersGroupSettingService) GetUsersGroupSettingByUserID(ctx context.Context, req request.GetUsersGroupSettingByUserID) ([]response.GetUsersGroupSettingByUserID, error) {
 	var sql sqlx.Sqlx
-	var resp []respone.GetUsersGroupSettingByUserID
+	var resp []response.GetUsersGroupSettingByUserID
 
 	sql.Stmt = `
 		select distinct ug.id, ug.group_name, case when ugs.user_id is not null then true else false end as has_in_group
@@ -92,7 +92,7 @@ func (u *usersGroupSettingService) GetUsersGroupSettingByUserID(ctx context.Cont
 
 	if len(rows) > 0 {
 		for _, rec := range rows {
-			data := respone.GetUsersGroupSettingByUserID{
+			data := response.GetUsersGroupSettingByUserID{
 				ID:         int(rec.ID.Int64),
 				GroupName:  rec.GroupName.String,
 				HasInGroup: int(rec.HasInGroup.Int64),

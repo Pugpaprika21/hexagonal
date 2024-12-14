@@ -1,4 +1,4 @@
-package respone
+package response
 
 type GetUsersGroup struct {
 	ID               int    `json:"id"`

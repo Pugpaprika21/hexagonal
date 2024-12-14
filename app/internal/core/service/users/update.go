@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func (u *usersSevice) UpdateUsers(ctx context.Context, req []request.UpdateUsersRows) error {
+func (u *usersService) UpdateUsers(ctx context.Context, req []request.UpdateUsersRows) error {
 	var sql sqlx.Sqlx
 	var parmObj []schema.UpdateUsers
 

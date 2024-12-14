@@ -3,6 +3,7 @@ package schema
 import "database/sql"
 
 type GetUsers struct {
+	RowNum       sql.NullInt64  `gorm:"column:row_num"`
 	Address      sql.NullString `gorm:"column:address"`
 	CreatedAt    sql.NullString `gorm:"column:created_at"`
 	DateOfBirth  sql.NullString `gorm:"column:date_of_birth"`
@@ -16,6 +17,7 @@ type GetUsers struct {
 	PhoneNumber  sql.NullString `gorm:"column:phone_number"`
 	UpdatedAt    sql.NullString `gorm:"column:updated_at"`
 	Username     sql.NullString `gorm:"column:username"`
+	FullName     sql.NullString `gorm:"column:full_name"`
 }
 
 type CreateUsers struct {

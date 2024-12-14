@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 	"pugpaprika/app/pkg/constant"
-	"pugpaprika/app/pkg/respone"
+	"pugpaprika/app/pkg/response"
 	"strings"
 
 	"github.com/labstack/echo/v4"
@@ -25,7 +25,7 @@ func New() IJwtx {
 func (j *jwtx) Validate() echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			var resp = respone.NewBuilder()
+			var resp = response.NewBuilder()
 			authHeader := c.Request().Header.Get("Authorization")
 			if authHeader == "" {
 				return c.JSON(http.StatusUnauthorized, resp.Code(constant.FOR_AUTH_ERROR).Message("Missing Authorization header").Build())
