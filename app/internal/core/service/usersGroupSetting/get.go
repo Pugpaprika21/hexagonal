@@ -54,7 +54,6 @@ func (u *usersGroupSettingService) GetUsersGroupSetting(ctx context.Context, req
 	return resp, nil
 }
 
-// GetUsersGroupSettingByUserID implements IUsersGroupSettingService.
 func (u *usersGroupSettingService) GetUsersGroupSettingByUserID(ctx context.Context, req request.GetUsersGroupSettingByUserID) ([]respone.GetUsersGroupSettingByUserID, error) {
 	var sql sqlx.Sqlx
 	var resp []respone.GetUsersGroupSettingByUserID
