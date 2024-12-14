@@ -1,10 +1,5 @@
 package request
 
-type LazyLoad struct {
-	Limit  int32 `json:"limit"`
-	Offset int32 `json:"offset"`
-}
-
 type GetUsers struct {
 	LazyLoad     LazyLoad `json:"lazy_load"`
 	Address      string   `json:"address"`
