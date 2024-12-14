@@ -9,12 +9,15 @@ import (
 
 type IUsersSevice interface {
 	GetUsers(ctx context.Context, req request.GetUsers) ([]respone.GetUsers, error)
+	CreateUsers(ctx context.Context, req []request.CreateUsersRows) error
+	UpdateUsers(ctx context.Context, req []request.UpdateUsersRows) error
+	DeleteUsers(ctx context.Context, req request.DeleteUsers) error
 }
 
 type usersSevice struct {
-	repos users.IUserRepository
+	repos users.IUsersRepository
 }
 
-func NewUsersSevice(repos users.IUserRepository) IUsersSevice {
+func NewUsersService(repos users.IUsersRepository) IUsersSevice {
 	return &usersSevice{repos: repos}
 }

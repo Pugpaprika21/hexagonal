@@ -17,3 +17,35 @@ type GetUsers struct {
 	UpdatedAt    sql.NullString `gorm:"column:updated_at"`
 	Username     sql.NullString `gorm:"column:username"`
 }
+
+type CreateUsers struct {
+	ID           *int    `gorm:"column:id"`
+	Address      *string `gorm:"column:address"`
+	CreatedAt    *string `gorm:"column:created_at"`
+	DateOfBirth  *string `gorm:"column:date_of_birth"`
+	DeletedAt    *string `gorm:"column:deleted_at"`
+	Email        *string `gorm:"column:email"`
+	FirstName    *string `gorm:"column:first_name"`
+	LastName     *string `gorm:"column:last_name"`
+	Password     *string `gorm:"column:password"`
+	PasswordHash *string `gorm:"column:password_hash"`
+	PhoneNumber  *string `gorm:"column:phone_number"`
+	UpdatedAt    *string `gorm:"column:updated_at"`
+	Username     *string `gorm:"column:username"`
+}
+
+type UpdateUsers struct {
+	ID           *int    `gorm:"column:id"`
+	Address      *string `gorm:"column:address"`
+	CreatedAt    *string `gorm:"column:created_at"`
+	DateOfBirth  *string `gorm:"column:date_of_birth"`
+	DeletedAt    *string `gorm:"column:deleted_at"`
+	Email        *string `gorm:"column:email"`
+	FirstName    *string `gorm:"column:first_name"`
+	LastName     *string `gorm:"column:last_name"`
+	Password     *string `gorm:"column:password"`
+	PasswordHash *string `gorm:"column:password_hash"`
+	PhoneNumber  *string `gorm:"column:phone_number"`
+	UpdatedAt    *string `gorm:"column:updated_at"`
+	Username     *string `gorm:"column:username"`
+}

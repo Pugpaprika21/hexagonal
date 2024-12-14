@@ -8,6 +8,9 @@ import (
 
 type IUserHandler interface {
 	GetUsers(c echo.Context) error
+	CreateUsers(c echo.Context) error
+	UpdateUsers(c echo.Context) error
+	DeleteUsers(c echo.Context) error
 }
 
 type userHandler struct {
