@@ -4,6 +4,7 @@ import (
 	"context"
 	"pugpaprika/app/dto/request"
 	"pugpaprika/app/internal/core/schema"
+	"pugpaprika/app/pkg/sqlx"
 )
 
 func (u *usersService) CreateUsers(ctx context.Context, req []request.CreateUsersRows) error {
@@ -21,7 +22,7 @@ func (u *usersService) CreateUsers(ctx context.Context, req []request.CreateUser
 			PasswordHash: rec.PasswordHash,
 			PhoneNumber:  rec.PhoneNumber,
 			UpdatedAt:    rec.UpdatedAt,
-			Username:     rec.Username,
+			Username:     sqlx.Nil(rec.Username),
 		}
 		parmObj = append(parmObj, data)
 	}
