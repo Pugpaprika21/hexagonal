@@ -7,16 +7,15 @@ import (
 )
 
 func (u *usersGroupSettingService) CreateUsersGroupSetting(ctx context.Context, req []request.CreateUsersGroupSettingRows) error {
-	var parmObj []schema.CreateUsersGroupSetting
-	for _, rec := range req {
-		data := schema.CreateUsersGroupSetting{
+	parmObj := make([]schema.CreateUsersGroupSetting, len(req))
+	for i, rec := range req {
+		parmObj[i] = schema.CreateUsersGroupSetting{
 			UserID:    rec.UserID,
 			GroupID:   rec.GroupID,
 			CreatedAt: rec.CreatedAt,
 			DeletedAt: rec.DeletedAt,
 			UpdatedAt: rec.UpdatedAt,
 		}
-		parmObj = append(parmObj, data)
 	}
 
 	if err := u.repos.CreateUsersGroupSetting(ctx, parmObj); err != nil {

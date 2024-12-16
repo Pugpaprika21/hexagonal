@@ -10,10 +10,10 @@ import (
 
 func (u *usersGroupService) UpdateUsersGroup(ctx context.Context, req []request.UpdateUsersGroupRows) error {
 	var sql sqlx.Sqlx
-	var parmObj []schema.UpdateUsersGroup
+	parmObj := make([]schema.UpdateUsersGroup, len(req))
 
-	for _, rec := range req {
-		data := schema.UpdateUsersGroup{
+	for i, rec := range req {
+		parmObj[i] = schema.UpdateUsersGroup{
 			GroupCode:        rec.GroupCode,
 			GroupName:        rec.GroupName,
 			GroupDescription: rec.GroupDescription,
@@ -21,8 +21,6 @@ func (u *usersGroupService) UpdateUsersGroup(ctx context.Context, req []request.
 			DeletedAt:        rec.DeletedAt,
 			UpdatedAt:        rec.UpdatedAt,
 		}
-
-		parmObj = append(parmObj, data)
 
 		if *rec.ID != 0 {
 			sql.WhereClause = append(sql.WhereClause, "id = ?")

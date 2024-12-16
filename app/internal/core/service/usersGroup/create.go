@@ -7,9 +7,9 @@ import (
 )
 
 func (u *usersGroupService) CreateUsersGroup(ctx context.Context, req []request.CreateUsersGroupRows) error {
-	var parmObj []schema.CreateUsersGroup
-	for _, rec := range req {
-		data := schema.CreateUsersGroup{
+	parmObj := make([]schema.CreateUsersGroup, len(req))
+	for i, rec := range req {
+		parmObj[i] = schema.CreateUsersGroup{
 			GroupCode:        rec.GroupCode,
 			GroupName:        rec.GroupName,
 			GroupDescription: rec.GroupDescription,
@@ -17,7 +17,6 @@ func (u *usersGroupService) CreateUsersGroup(ctx context.Context, req []request.
 			DeletedAt:        rec.DeletedAt,
 			UpdatedAt:        rec.UpdatedAt,
 		}
-		parmObj = append(parmObj, data)
 	}
 
 	if err := u.repos.CreateUsersGroup(ctx, parmObj); err != nil {

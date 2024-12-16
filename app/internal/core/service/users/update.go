@@ -10,10 +10,10 @@ import (
 
 func (u *usersService) UpdateUsers(ctx context.Context, req []request.UpdateUsersRows) error {
 	var sql sqlx.Sqlx
-	var parmObj []schema.UpdateUsers
+	parmObj := make([]schema.UpdateUsers, len(req))
 
-	for _, rec := range req {
-		data := schema.UpdateUsers{
+	for i, rec := range req {
+		parmObj[i] = schema.UpdateUsers{
 			Address:      rec.Address,
 			CreatedAt:    rec.CreatedAt,
 			DateOfBirth:  rec.DateOfBirth,
@@ -27,8 +27,6 @@ func (u *usersService) UpdateUsers(ctx context.Context, req []request.UpdateUser
 			UpdatedAt:    rec.UpdatedAt,
 			Username:     rec.Username,
 		}
-
-		parmObj = append(parmObj, data)
 
 		if *rec.ID != 0 {
 			sql.WhereClause = append(sql.WhereClause, "id = ?")
