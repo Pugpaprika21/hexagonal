@@ -16,10 +16,10 @@ type IUsersGroupSettingRepository interface {
 	DeleteUsersSettingGroup(ctx context.Context, sql sqlx.Sqlx) error
 }
 
-type UsersGroupSettingRepository struct {
+type usersGroupSettingRepository struct {
 	db *gorm.DB
 }
 
 func NewUsersGroupSettingRepository(db *gorm.DB) IUsersGroupSettingRepository {
-	return &UsersGroupSettingRepository{db: db}
+	return &usersGroupSettingRepository{db: db}
 }

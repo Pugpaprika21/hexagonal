@@ -5,7 +5,7 @@ import (
 	"pugpaprika/app/internal/core/schema"
 )
 
-func (u *UsersGroupSettingRepository) CreateUsersGroupSetting(ctx context.Context, parmObj []schema.CreateUsersGroupSetting) error {
+func (u *usersGroupSettingRepository) CreateUsersGroupSetting(ctx context.Context, parmObj []schema.CreateUsersGroupSetting) error {
 	tx := u.db.WithContext(ctx).Begin()
 	if tx.Error != nil {
 		return tx.Error

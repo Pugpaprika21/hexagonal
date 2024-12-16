@@ -6,7 +6,7 @@ import (
 	"pugpaprika/app/pkg/sqlx"
 )
 
-func (u *UsersGroupSettingRepository) UpdateUsersGroupSetting(ctx context.Context, parmObj []schema.UpdateUsersGroupSetting, sql sqlx.Sqlx) error {
+func (u *usersGroupSettingRepository) UpdateUsersGroupSetting(ctx context.Context, parmObj []schema.UpdateUsersGroupSetting, sql sqlx.Sqlx) error {
 	tx := u.db.WithContext(ctx).Begin()
 	if tx.Error != nil {
 		return tx.Error

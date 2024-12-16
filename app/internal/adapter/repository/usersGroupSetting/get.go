@@ -6,7 +6,7 @@ import (
 	"pugpaprika/app/pkg/sqlx"
 )
 
-func (u *UsersGroupSettingRepository) GetUsersGroupSetting(ctx context.Context, sql sqlx.Sqlx) ([]schema.GetUsersGroupSetting, error) {
+func (u *usersGroupSettingRepository) GetUsersGroupSetting(ctx context.Context, sql sqlx.Sqlx) ([]schema.GetUsersGroupSetting, error) {
 	var rows []schema.GetUsersGroupSetting
 	result := u.db.WithContext(ctx).Raw(sql.Stmt, sql.Args...).Scan(&rows)
 	if result.Error != nil {
@@ -15,7 +15,7 @@ func (u *UsersGroupSettingRepository) GetUsersGroupSetting(ctx context.Context, 
 	return rows, nil
 }
 
-func (u *UsersGroupSettingRepository) GetUsersGroupSettingByUserID(ctx context.Context, sql sqlx.Sqlx) ([]schema.GetUsersGroupSettingByUserID, error) {
+func (u *usersGroupSettingRepository) GetUsersGroupSettingByUserID(ctx context.Context, sql sqlx.Sqlx) ([]schema.GetUsersGroupSettingByUserID, error) {
 	var rows []schema.GetUsersGroupSettingByUserID
 	result := u.db.WithContext(ctx).Raw(sql.Stmt, sql.Args...).Scan(&rows)
 	if result.Error != nil {

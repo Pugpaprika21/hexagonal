@@ -5,7 +5,7 @@ import (
 	"pugpaprika/app/pkg/sqlx"
 )
 
-func (u *UsersGroupSettingRepository) DeleteUsersSettingGroup(ctx context.Context, sql sqlx.Sqlx) error {
+func (u *usersGroupSettingRepository) DeleteUsersSettingGroup(ctx context.Context, sql sqlx.Sqlx) error {
 	tx := u.db.WithContext(ctx).Begin()
 	if tx.Error != nil {
 		return tx.Error

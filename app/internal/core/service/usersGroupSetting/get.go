@@ -102,7 +102,6 @@ func (u *usersGroupSettingService) GetUsersGroupSettingByUserID(ctx context.Cont
 			}
 			resp = append(resp, data)
 		}
-
 	}
 
 	return resp, nil
