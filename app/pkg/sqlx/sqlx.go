@@ -10,15 +10,3 @@ type Sqlx struct {
 type Each struct {
 	Rows []map[string]interface{}
 }
-
-func Nil[T comparable](value *T) *T {
-	if value == nil {
-		return nil
-	}
-
-	var zero T
-	if *value == zero {
-		return nil
-	}
-	return value
-}
