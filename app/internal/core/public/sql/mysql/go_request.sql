@@ -1,4 +1,4 @@
-DELIMITER $ $ CREATE PROCEDURE go_request_struct(IN tableName VARCHAR(255)) BEGIN WITH unique_columns AS (
+DELIMITER $ $ CREATE PROCEDURE go_request(IN tableName VARCHAR(255)) BEGIN WITH unique_columns AS (
     SELECT
         COLUMN_NAME,
         ORDINAL_POSITION,
