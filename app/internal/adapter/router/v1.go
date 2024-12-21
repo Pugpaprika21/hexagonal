@@ -35,6 +35,12 @@ func (r *appRouter) v1() {
 			usersGroupSetting.POST("/updateUsersGroupSetting", r.handler.UsersGroupSetting.UpdateUsersGroupSetting)
 			usersGroupSetting.POST("/deleteUsersSettingGroup", r.handler.UsersGroupSetting.DeleteUsersSettingGroup)
 		}
+
+		migrations := v1.Group("/migrations")
+		{
+			migrations.POST("/getGoStructProcedure", r.handler.Migrations.GetGoStructProcedure)
+			migrations.POST("/createGoStructProcedure", r.handler.Migrations.CreateGoStructProcedure)
+		}
 	}
 
 	v1.GET("/heat_check", func(c echo.Context) error {

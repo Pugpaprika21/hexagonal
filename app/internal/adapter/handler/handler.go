@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"pugpaprika/app/internal/adapter/handler/migrations"
 	users "pugpaprika/app/internal/adapter/handler/users"
 	usersgroup "pugpaprika/app/internal/adapter/handler/usersGroup"
 	usersgroupsetting "pugpaprika/app/internal/adapter/handler/usersGroupSetting"
@@ -11,6 +12,7 @@ type Handler struct {
 	Users             users.IUserHandler
 	UsersGroup        usersgroup.IUsersGroupHandler
 	UsersGroupSetting usersgroupsetting.IUsersGroupSettingHandler
+	Migrations        migrations.IMigrationsHandler
 }
 
 func NewHandler(serv *service.Service) *Handler {
@@ -18,5 +20,6 @@ func NewHandler(serv *service.Service) *Handler {
 		Users:             users.NewUserHandler(serv.Users),
 		UsersGroup:        usersgroup.NewUsersGroupHandler(serv.UsersGroup),
 		UsersGroupSetting: usersgroupsetting.NewUsersGroupSettingHandler(serv.UsersGroupSetting),
+		Migrations:        migrations.NewMigrationsHandler(serv.Migrations),
 	}
 }
