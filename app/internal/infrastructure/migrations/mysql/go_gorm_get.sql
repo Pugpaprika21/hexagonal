@@ -1,4 +1,4 @@
-DELIMITER $ $ CREATE PROCEDURE go_respone_get(IN tableName VARCHAR(255)) BEGIN WITH unique_columns AS (
+CREATE PROCEDURE go_gorm_get(IN tableName VARCHAR(255)) BEGIN WITH unique_columns AS (
     SELECT
         COLUMN_NAME,
         ORDINAL_POSITION,
@@ -80,26 +80,26 @@ SELECT
         ' ',
         CASE
             DATA_TYPE
-            WHEN 'date' THEN 'string'
-            WHEN 'varchar' THEN 'string'
-            WHEN 'text' THEN 'string'
-            WHEN 'char' THEN 'string'
-            WHEN 'longtext' THEN 'string'
-            WHEN 'datetime' THEN 'string'
-            WHEN 'timestamp' THEN 'string'
-            WHEN 'int' THEN 'int32'
-            WHEN 'bigint' THEN 'int64'
-            WHEN 'tinyint' THEN 'bool'
-            WHEN 'decimal' THEN 'float64'
+            WHEN 'date' THEN 'sql.NullString'
+            WHEN 'varchar' THEN 'sql.NullString'
+            WHEN 'text' THEN 'sql.NullString'
+            WHEN 'char' THEN 'sql.NullString'
+            WHEN 'longtext' THEN 'sql.NullString'
+            WHEN 'datetime' THEN 'sql.NullString'
+            WHEN 'timestamp' THEN 'sql.NullString'
+            WHEN 'int' THEN 'sql.NullInt32'
+            WHEN 'bigint' THEN 'sql.NullInt64'
+            WHEN 'tinyint' THEN 'sql.NullBool'
+            WHEN 'decimal' THEN 'sql.NullFloat64'
             ELSE DATA_TYPE
         END,
-        ' `json:"',
+        ' `gorm:"column:',
         LOWER(COLUMN_NAME),
         '"`'
-    ) AS request_struct
+    ) AS go_gorm_get
 FROM
     formatted_columns
 ORDER BY
     ORDINAL_POSITION;
 
-END $ $ DELIMITER;
+END;

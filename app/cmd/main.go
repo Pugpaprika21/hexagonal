@@ -51,5 +51,5 @@ func main() {
 		os.Exit(0)
 	}()
 
-	router.NewRouter(handlers).Start()
+	router.NewRouter(handlers, db).Start()
 }

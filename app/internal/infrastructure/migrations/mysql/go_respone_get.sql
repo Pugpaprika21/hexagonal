@@ -1,4 +1,4 @@
-DELIMITER $ $ CREATE PROCEDURE go_request(IN tableName VARCHAR(255)) BEGIN WITH unique_columns AS (
+CREATE PROCEDURE go_respone_get(IN tableName VARCHAR(255)) BEGIN WITH unique_columns AS (
     SELECT
         COLUMN_NAME,
         ORDINAL_POSITION,
@@ -77,7 +77,7 @@ formatted_columns AS (
 SELECT
     CONCAT(
         formatted_name,
-        ' *',
+        ' ',
         CASE
             DATA_TYPE
             WHEN 'date' THEN 'string'
@@ -102,4 +102,4 @@ FROM
 ORDER BY
     ORDINAL_POSITION;
 
-END $ $ DELIMITER;
+END;

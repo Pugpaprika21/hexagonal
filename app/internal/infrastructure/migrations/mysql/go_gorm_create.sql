@@ -1,4 +1,4 @@
-DELIMITER $ $ CREATE PROCEDURE go_gorm_create(IN tableName VARCHAR(255)) BEGIN WITH unique_columns AS (
+CREATE PROCEDURE go_gorm_create(IN tableName VARCHAR(255)) BEGIN WITH unique_columns AS (
     SELECT
         COLUMN_NAME,
         ORDINAL_POSITION,
@@ -102,4 +102,4 @@ FROM
 ORDER BY
     ORDINAL_POSITION;
 
-END $ $ DELIMITER;
+END;
