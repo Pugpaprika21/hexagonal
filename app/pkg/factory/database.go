@@ -2,7 +2,6 @@ package factory
 
 import (
 	"errors"
-	"os"
 	"pugpaprika/app/pkg/database"
 
 	"gorm.io/gorm"
@@ -13,8 +12,7 @@ type IDbFactory interface {
 	Close() error
 }
 
-func NewDatabase() (IDbFactory, error) {
-	driver := os.Getenv("DB_DRIVER")
+func NewDatabase(driver string) (IDbFactory, error) {
 	switch driver {
 	case "pgsql":
 		return database.NewPgSqlConnector(), nil
