@@ -27,38 +27,36 @@ func (m *migrationsService) GetGoStructProcedure(ctx context.Context, parmObj re
 	return "\n" + strings.Join(result, "\n"), nil
 }
 
-// GetAllGoStructProcedure *
-func (m *migrationsService) GetAllGoStructProcedure(ctx context.Context, parmObj request.GetAllGoStructProcedure) ([]string, error) {
+func (m *migrationsService) GetAllGoStructProcedure(ctx context.Context, parmObj request.GetAllGoStructProcedure) (string, error) {
 	var sql sqlx.Sqlx
-	var procedures = []string{
-		constant.GO_GORM_CREATE,
-		constant.GO_GORM_GET,
-		constant.GO_REQUEST,
-		constant.GO_RESPONE_GET,
-		constant.GO_GORM_CREATEFIELD,
-		constant.GO_GORM_RESPONSEFIELD,
+	var formatStrResult strings.Builder
+
+	steps := []struct {
+		label string
+		proc  string
+	}{
+		{"schema_struct", constant.GO_GORM_CREATE},
+		{"request_struct", constant.GO_REQUEST},
+		{"response_struct", constant.GO_RESPONE_GET},
+		{"response_gorm_struct", constant.GO_GORM_GET},
+		{"create_dto", constant.GO_GORM_CREATEFIELD},
+		{"response_dto", constant.GO_GORM_RESPONSEFIELD},
 	}
 
-	var goStructResult []string
-
-	for _, stName := range procedures {
+	for _, step := range steps {
 		sql.Stmt = fmt.Sprintf("set @tablename = '%s';", parmObj.Tablename)
-		_, err := m.repos.GetGoStructProcedure(ctx, sql)
-		if err != nil {
-			return nil, err
+		if _, err := m.repos.GetAllGoStructProcedure(ctx, sql); err != nil {
+			return "", err
 		}
 
-		sql.Stmt = fmt.Sprintf("call %s(@tablename);", stName)
-
-		result, err := m.repos.GetGoStructProcedure(ctx, sql)
+		sql.Stmt = fmt.Sprintf("call %s(@tablename);", step.proc)
+		results, err := m.repos.GetAllGoStructProcedure(ctx, sql)
 		if err != nil {
-			return nil, err
+			return "", err
 		}
 
-		structResult := strings.Join(result, "\n")
-
-		goStructResult = append(goStructResult, structResult)
+		formatStrResult.WriteString(fmt.Sprintf("\n\n%s\n\n%s", step.label, strings.Join(results, "\n")))
 	}
 
-	return goStructResult, nil
+	return formatStrResult.String(), nil
 }

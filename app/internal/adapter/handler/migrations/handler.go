@@ -10,6 +10,7 @@ type IMigrationsHandler interface {
 	GetGoStructProcedure(c echo.Context) error
 	GetAllGoStructProcedure(c echo.Context) error
 	CreateGoStructProcedure(c echo.Context) error
+	DeleteAllGoStructProcedure(c echo.Context) error
 }
 
 type migrationsHandler struct {

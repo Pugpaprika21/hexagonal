@@ -5,7 +5,6 @@ import (
 	"pugpaprika/app/dto/request"
 	"pugpaprika/app/pkg/constant"
 	"pugpaprika/app/pkg/response"
-	"strings"
 
 	"github.com/labstack/echo/v4"
 )
@@ -39,5 +38,5 @@ func (m *migrationsHandler) GetAllGoStructProcedure(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, resp.Code(constant.FOR_ERROR).Message(err.Error()).Build())
 	}
 
-	return c.String(http.StatusOK, strings.Join(data, " "))
+	return c.String(http.StatusOK, data)
 }

@@ -41,6 +41,7 @@ func (r *appRouter) v1() {
 			migrations.POST("/getGoStructProcedure", r.handler.Migrations.GetGoStructProcedure)
 			migrations.POST("/getAllGoStructProcedure", r.handler.Migrations.GetAllGoStructProcedure)
 			migrations.POST("/createGoStructProcedure", r.handler.Migrations.CreateGoStructProcedure)
+			migrations.POST("/deleteAllGoStructProcedure", r.handler.Migrations.DeleteAllGoStructProcedure)
 		}
 	}
 

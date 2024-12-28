@@ -8,8 +8,9 @@ import (
 
 type IMigrationsService interface {
 	GetGoStructProcedure(ctx context.Context, parmObj request.GetGoStructProcedure) (string, error)
-	GetAllGoStructProcedure(ctx context.Context, parmObj request.GetAllGoStructProcedure) ([]string, error)
+	GetAllGoStructProcedure(ctx context.Context, parmObj request.GetAllGoStructProcedure) (string, error)
 	CreateGoStructProcedure(ctx context.Context) error
+	DeleteAllGoStructProcedure(ctx context.Context) error
 }
 
 type migrationsService struct {

@@ -11,6 +11,7 @@ type IMigrationsRepository interface {
 	GetGoStructProcedure(ctx context.Context, sql sqlx.Sqlx) ([]string, error)
 	GetAllGoStructProcedure(ctx context.Context, sql sqlx.Sqlx) ([]string, error)
 	CreateGoStructProcedure(ctx context.Context, sql sqlx.Sqlx) error
+	DeleteAllGoStructProcedure(ctx context.Context, sql sqlx.Sqlx) error
 }
 
 type migrationsRepository struct {
