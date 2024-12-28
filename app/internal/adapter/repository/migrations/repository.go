@@ -9,6 +9,7 @@ import (
 
 type IMigrationsRepository interface {
 	GetGoStructProcedure(ctx context.Context, sql sqlx.Sqlx) ([]string, error)
+	GetAllGoStructProcedure(ctx context.Context, sql sqlx.Sqlx) ([]string, error)
 	CreateGoStructProcedure(ctx context.Context, sql sqlx.Sqlx) error
 }
 

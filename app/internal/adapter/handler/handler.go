@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"pugpaprika/app/internal/adapter/handler/migrations"
+	migrations "pugpaprika/app/internal/adapter/handler/migrations"
 	users "pugpaprika/app/internal/adapter/handler/users"
 	usersgroup "pugpaprika/app/internal/adapter/handler/usersGroup"
 	usersgroupsetting "pugpaprika/app/internal/adapter/handler/usersGroupSetting"

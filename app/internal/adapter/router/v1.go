@@ -39,6 +39,7 @@ func (r *appRouter) v1() {
 		migrations := v1.Group("/migrations")
 		{
 			migrations.POST("/getGoStructProcedure", r.handler.Migrations.GetGoStructProcedure)
+			migrations.POST("/getAllGoStructProcedure", r.handler.Migrations.GetAllGoStructProcedure)
 			migrations.POST("/createGoStructProcedure", r.handler.Migrations.CreateGoStructProcedure)
 		}
 	}
