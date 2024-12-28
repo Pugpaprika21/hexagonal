@@ -18,7 +18,7 @@ func main() {
 		log.Fatalf("Error loading environment config: %s", err)
 	}
 
-	connector, err := factory.NewDatabase()
+	connector, err := factory.NewDatabase(os.Getenv("DB_DRIVER"))
 	if err != nil {
 		log.Fatalf("Error selecting database: %s", err)
 	}
