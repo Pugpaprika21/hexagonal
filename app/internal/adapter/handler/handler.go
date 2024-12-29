@@ -2,6 +2,7 @@ package handler
 
 import (
 	migrations "pugpaprika/app/internal/adapter/handler/migrations"
+	sysleftbarmenus "pugpaprika/app/internal/adapter/handler/sysleftbarmenus"
 	users "pugpaprika/app/internal/adapter/handler/users"
 	usersgroup "pugpaprika/app/internal/adapter/handler/usersGroup"
 	usersgroupsetting "pugpaprika/app/internal/adapter/handler/usersGroupSetting"
@@ -13,6 +14,7 @@ type Handler struct {
 	UsersGroup        usersgroup.IUsersGroupHandler
 	UsersGroupSetting usersgroupsetting.IUsersGroupSettingHandler
 	Migrations        migrations.IMigrationsHandler
+	SysLeftBarMenus   sysleftbarmenus.ISyLeftBarMenusHandler
 }
 
 func NewHandler(serv *service.Service) *Handler {
@@ -21,5 +23,6 @@ func NewHandler(serv *service.Service) *Handler {
 		UsersGroup:        usersgroup.NewUsersGroupHandler(serv.UsersGroup),
 		UsersGroupSetting: usersgroupsetting.NewUsersGroupSettingHandler(serv.UsersGroupSetting),
 		Migrations:        migrations.NewMigrationsHandler(serv.Migrations),
+		SysLeftBarMenus:   sysleftbarmenus.NewSyLeftBarMenusHandler(serv.SysLeftBarMenus),
 	}
 }

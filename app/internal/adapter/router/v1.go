@@ -43,6 +43,11 @@ func (r *appRouter) v1() {
 			migrations.POST("/createGoStructProcedure", r.handler.Migrations.CreateGoStructProcedure)
 			migrations.POST("/deleteAllGoStructProcedure", r.handler.Migrations.DeleteAllGoStructProcedure)
 		}
+
+		sysLeftbarMenus := v1.Group("/sysLeftbarMenus")
+		{
+			sysLeftbarMenus.GET("/getMainManus", r.handler.SysLeftBarMenus.GetMainManus)
+		}
 	}
 
 	v1.GET("/heat_check", func(c echo.Context) error {
