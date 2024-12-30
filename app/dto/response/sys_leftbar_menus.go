@@ -1,6 +1,6 @@
 package response
 
-type GetMainManus struct {
+type GetMainMenus struct {
 	ID            int32  `json:"id"`
 	UserID        int32  `json:"user_id"`
 	RoleID        int32  `json:"role_id"`
@@ -36,3 +36,41 @@ type GetNewMainManus struct {
 	UserID          int32  `json:"user_id"`
 	RoleID          int32  `json:"role_id"`
 }
+
+type GetAllMenus struct {
+	ID            int32         `json:"id"`
+	UserID        int32         `json:"user_id"`
+	RoleID        int32         `json:"role_id"`
+	Name          string        `json:"name"`
+	NameEn        string        `json:"name_en"`
+	Url           string        `json:"url"`
+	Icon          string        `json:"icon"`
+	Tooltip       string        `json:"tooltip"`
+	ParentID      int32         `json:"parent_id"`
+	Position      int32         `json:"position"`
+	IsActive      bool          `json:"is_active"`
+	IsExternal    bool          `json:"is_external"`
+	PermissionKey string        `json:"permission_key"`
+	CreatedAt     string        `json:"created_at"`
+	UpdatedAt     string        `json:"updated_at"`
+	SubMenus      []GetAllMenus `json:"sub_menus,omitempty"`
+}
+
+// type GetAllMenus struct {
+// 	ID            int32         `json:"id,omitempty"`
+// 	UserID        int32         `json:"user_id,omitempty"`
+// 	RoleID        int32         `json:"role_id,omitempty"`
+// 	Name          string        `json:"name,omitempty"`
+// 	NameEn        string        `json:"name_en,omitempty"`
+// 	Url           string        `json:"url,omitempty"`
+// 	Icon          string        `json:"icon,omitempty"`
+// 	Tooltip       string        `json:"tooltip,omitempty"`
+// 	ParentID      int32         `json:"parent_id,omitempty"`
+// 	Position      int32         `json:"position,omitempty"`
+// 	IsActive      bool          `json:"is_active,omitempty"`
+// 	IsExternal    bool          `json:"is_external,omitempty"`
+// 	PermissionKey string        `json:"permission_key,omitempty"`
+// 	CreatedAt     string        `json:"created_at,omitempty"`
+// 	UpdatedAt     string        `json:"updated_at,omitempty"`
+// 	SubMenus      []GetAllMenus `json:"sub_menus,omitempty"`
+// }

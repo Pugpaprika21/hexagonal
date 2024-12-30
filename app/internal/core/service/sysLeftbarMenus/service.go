@@ -8,7 +8,8 @@ import (
 )
 
 type ISysLeftBarMenusService interface {
-	GetMainManus(ctx context.Context, req request.GetNewMainManus) ([]response.GetNewMainManus, error)
+	GetMainMenus(ctx context.Context, req request.GetNewMainManus) ([]response.GetNewMainManus, error)
+	GetAllMenus(ctx context.Context, req request.GetAllMenus) ([]response.GetAllMenus, error)
 }
 
 type sysLeftBarMenusService struct {

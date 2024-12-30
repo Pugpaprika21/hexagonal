@@ -9,7 +9,9 @@ import (
 )
 
 type ISysLeftBarMenusRepository interface {
-	GetMainManus(ctx context.Context, sql sqlx.Sqlx) ([]schema.GetNewMainManus, error)
+	GetMainMenus(ctx context.Context, sql sqlx.Sqlx) ([]schema.GetNewMainManus, error)
+	GetParentMenus(ctx context.Context, sql sqlx.Sqlx) ([]schema.GetParentMenus, error)
+	GetChildMenus(ctx context.Context, sql sqlx.Sqlx) ([]schema.GetChildMenus, error)
 }
 
 type sysLeftBarMenusRepository struct {

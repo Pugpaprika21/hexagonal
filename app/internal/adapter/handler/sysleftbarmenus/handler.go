@@ -7,7 +7,8 @@ import (
 )
 
 type ISyLeftBarMenusHandler interface {
-	GetMainManus(c echo.Context) error
+	GetMainMenus(c echo.Context) error
+	GetAllMenus(c echo.Context) error
 }
 
 type syLeftBarMenusHandler struct {

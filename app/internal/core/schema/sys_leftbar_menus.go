@@ -2,7 +2,43 @@ package schema
 
 import "database/sql"
 
-type GetMainManus struct {
+type GetMainMenus struct {
+	ID            sql.NullInt32  `gorm:"column:id"`
+	UserID        sql.NullInt32  `gorm:"column:user_id"`
+	RoleID        sql.NullInt32  `gorm:"column:role_id"`
+	Name          sql.NullString `gorm:"column:name"`
+	NameEn        sql.NullString `gorm:"column:name_en"`
+	Url           sql.NullString `gorm:"column:url"`
+	Icon          sql.NullString `gorm:"column:icon"`
+	Tooltip       sql.NullString `gorm:"column:tooltip"`
+	ParentID      sql.NullInt32  `gorm:"column:parent_id"`
+	Position      sql.NullInt32  `gorm:"column:position"`
+	IsActive      sql.NullBool   `gorm:"column:is_active"`
+	IsExternal    sql.NullBool   `gorm:"column:is_external"`
+	PermissionKey sql.NullString `gorm:"column:permission_key"`
+	CreatedAt     sql.NullString `gorm:"column:created_at"`
+	UpdatedAt     sql.NullString `gorm:"column:updated_at"`
+}
+
+type GetParentMenus struct {
+	ID            sql.NullInt32  `gorm:"column:id"`
+	UserID        sql.NullInt32  `gorm:"column:user_id"`
+	RoleID        sql.NullInt32  `gorm:"column:role_id"`
+	Name          sql.NullString `gorm:"column:name"`
+	NameEn        sql.NullString `gorm:"column:name_en"`
+	Url           sql.NullString `gorm:"column:url"`
+	Icon          sql.NullString `gorm:"column:icon"`
+	Tooltip       sql.NullString `gorm:"column:tooltip"`
+	ParentID      sql.NullInt32  `gorm:"column:parent_id"`
+	Position      sql.NullInt32  `gorm:"column:position"`
+	IsActive      sql.NullBool   `gorm:"column:is_active"`
+	IsExternal    sql.NullBool   `gorm:"column:is_external"`
+	PermissionKey sql.NullString `gorm:"column:permission_key"`
+	CreatedAt     sql.NullString `gorm:"column:created_at"`
+	UpdatedAt     sql.NullString `gorm:"column:updated_at"`
+}
+
+type GetChildMenus struct {
 	ID            sql.NullInt32  `gorm:"column:id"`
 	UserID        sql.NullInt32  `gorm:"column:user_id"`
 	RoleID        sql.NullInt32  `gorm:"column:role_id"`

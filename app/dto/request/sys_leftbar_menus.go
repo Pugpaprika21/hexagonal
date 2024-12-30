@@ -1,6 +1,6 @@
 package request
 
-type GetMainManus struct {
+type GetMainMenus struct {
 	ID            *int32  `json:"id"`
 	UserID        *int32  `json:"user_id"`
 	RoleID        *int32  `json:"role_id"`
@@ -35,4 +35,22 @@ type GetNewMainManus struct {
 	SubMenuIsActive *bool   `json:"sub_menu_is_active"`
 	UserID          *int32  `json:"user_id"`
 	RoleID          *int32  `json:"role_id"`
+}
+
+type GetAllMenus struct {
+	ID            *int32  `json:"id"`
+	UserID        *int32  `json:"user_id"`
+	RoleID        *int32  `json:"role_id"`
+	Name          *string `json:"name"`
+	NameEn        *string `json:"name_en"`
+	Url           *string `json:"url"`
+	Icon          *string `json:"icon"`
+	Tooltip       *string `json:"tooltip"`
+	ParentID      *int32  `json:"parent_id"`
+	Position      *int32  `json:"position"`
+	IsActive      *bool   `json:"is_active"`
+	IsExternal    *bool   `json:"is_external"`
+	PermissionKey *string `json:"permission_key"`
+	CreatedAt     *string `json:"created_at"`
+	UpdatedAt     *string `json:"updated_at"`
 }

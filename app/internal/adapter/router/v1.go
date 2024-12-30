@@ -46,7 +46,8 @@ func (r *appRouter) v1() {
 
 		sysLeftbarMenus := v1.Group("/sysLeftbarMenus")
 		{
-			sysLeftbarMenus.GET("/getMainManus", r.handler.SysLeftBarMenus.GetMainManus)
+			sysLeftbarMenus.GET("/getMainManus", r.handler.SysLeftBarMenus.GetMainMenus)
+			sysLeftbarMenus.GET("/getAllMenus", r.handler.SysLeftBarMenus.GetAllMenus)
 		}
 	}
 
