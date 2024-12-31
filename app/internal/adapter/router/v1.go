@@ -48,6 +48,9 @@ func (r *appRouter) v1() {
 		{
 			sysLeftbarMenus.GET("/getMainManus", r.handler.SysLeftBarMenus.GetMainMenus)
 			sysLeftbarMenus.GET("/getAllMenus", r.handler.SysLeftBarMenus.GetAllMenus)
+			sysLeftbarMenus.POST("/createMenus", r.handler.SysLeftBarMenus.CreateMenus)
+			sysLeftbarMenus.POST("/updateMenus", r.handler.SysLeftBarMenus.UpdateMenus)
+			sysLeftbarMenus.POST("/deleteMenus", r.handler.SysLeftBarMenus.DeleteMenus)
 		}
 	}
 

@@ -9,6 +9,9 @@ import (
 type ISyLeftBarMenusHandler interface {
 	GetMainMenus(c echo.Context) error
 	GetAllMenus(c echo.Context) error
+	CreateMenus(c echo.Context) error
+	UpdateMenus(c echo.Context) error
+	DeleteMenus(c echo.Context) error
 }
 
 type syLeftBarMenusHandler struct {

@@ -74,3 +74,39 @@ type GetNewMainManus struct {
 	UserID          sql.NullInt32  `gorm:"column:user_id"`
 	RoleID          sql.NullInt32  `gorm:"column:role_id"`
 }
+
+type CreateMenus struct {
+	ID            *int32  `gorm:"column:id"`
+	UserID        *int32  `gorm:"column:user_id"`
+	RoleID        *int32  `gorm:"column:role_id"`
+	Name          *string `gorm:"column:name"`
+	NameEn        *string `gorm:"column:name_en"`
+	Url           *string `gorm:"column:url"`
+	Icon          *string `gorm:"column:icon"`
+	Tooltip       *string `gorm:"column:tooltip"`
+	ParentID      *int32  `gorm:"column:parent_id"`
+	Position      *int32  `gorm:"column:position"`
+	IsActive      *bool   `gorm:"column:is_active"`
+	IsExternal    *bool   `gorm:"column:is_external"`
+	PermissionKey *string `gorm:"column:permission_key"`
+	CreatedAt     *string `gorm:"column:created_at"`
+	UpdatedAt     *string `gorm:"column:updated_at"`
+}
+
+type UpdateMenus struct {
+	ID            *int32  `gorm:"column:id"`
+	UserID        *int32  `gorm:"column:user_id"`
+	RoleID        *int32  `gorm:"column:role_id"`
+	Name          *string `gorm:"column:name"`
+	NameEn        *string `gorm:"column:name_en"`
+	Url           *string `gorm:"column:url"`
+	Icon          *string `gorm:"column:icon"`
+	Tooltip       *string `gorm:"column:tooltip"`
+	ParentID      *int32  `gorm:"column:parent_id"`
+	Position      *int32  `gorm:"column:position"`
+	IsActive      *bool   `gorm:"column:is_active"`
+	IsExternal    *bool   `gorm:"column:is_external"`
+	PermissionKey *string `gorm:"column:permission_key"`
+	CreatedAt     *string `gorm:"column:created_at"`
+	UpdatedAt     *string `gorm:"column:updated_at"`
+}

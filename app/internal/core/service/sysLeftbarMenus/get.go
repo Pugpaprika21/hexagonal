@@ -95,7 +95,7 @@ func (s *sysLeftBarMenusService) GetAllMenus(ctx context.Context, req request.Ge
 	var sql sqlx.Sqlx
 	var resp []response.GetAllMenus
 
-	sql.Stmt = `select id, user_id, role_id, name, url, icon, is_active from sys_leftbar_menus where is_active = ?`
+	sql.Stmt = `select id, user_id, role_id, name, url, icon, is_active from sys_leftbar_menus `
 
 	if req.UserID != nil && *req.UserID != 0 {
 		sql.WhereClause = append(sql.WhereClause, "user_id = ?")
@@ -107,6 +107,7 @@ func (s *sysLeftBarMenusService) GetAllMenus(ctx context.Context, req request.Ge
 		sql.Args = append(sql.Args, req.RoleID)
 	}
 
+	sql.WhereClause = append(sql.WhereClause, "is_active = ?")
 	sql.Args = append(sql.Args, true)
 
 	if len(sql.WhereClause) > 0 {

@@ -54,3 +54,69 @@ type GetAllMenus struct {
 	CreatedAt     *string `json:"created_at"`
 	UpdatedAt     *string `json:"updated_at"`
 }
+
+type DeleteMenus struct {
+	ID            *int32  `json:"id"`
+	UserID        *int32  `json:"user_id"`
+	RoleID        *int32  `json:"role_id"`
+	Name          *string `json:"name"`
+	NameEn        *string `json:"name_en"`
+	Url           *string `json:"url"`
+	Icon          *string `json:"icon"`
+	Tooltip       *string `json:"tooltip"`
+	ParentID      *int32  `json:"parent_id"`
+	Position      *int32  `json:"position"`
+	IsActive      *bool   `json:"is_active"`
+	IsExternal    *bool   `json:"is_external"`
+	PermissionKey *string `json:"permission_key"`
+	CreatedAt     *string `json:"created_at"`
+	UpdatedAt     *string `json:"updated_at"`
+}
+
+type (
+	CreateMenusRows struct {
+		ID            *int32  `json:"id"`
+		UserID        *int32  `json:"user_id"`
+		RoleID        *int32  `json:"role_id"`
+		Name          *string `json:"name"`
+		NameEn        *string `json:"name_en"`
+		Url           *string `json:"url"`
+		Icon          *string `json:"icon"`
+		Tooltip       *string `json:"tooltip"`
+		ParentID      *int32  `json:"parent_id"`
+		Position      *int32  `json:"position"`
+		IsActive      *bool   `json:"is_active"`
+		IsExternal    *bool   `json:"is_external"`
+		PermissionKey *string `json:"permission_key"`
+		CreatedAt     *string `json:"created_at"`
+		UpdatedAt     *string `json:"updated_at"`
+	}
+
+	CreateMenus struct {
+		CreateMenusRows []CreateMenusRows `json:"cre_rows"`
+	}
+)
+
+type (
+	UpdateMenusRows struct {
+		ID            *int32  `json:"id"`
+		UserID        *int32  `json:"user_id"`
+		RoleID        *int32  `json:"role_id"`
+		Name          *string `json:"name"`
+		NameEn        *string `json:"name_en"`
+		Url           *string `json:"url"`
+		Icon          *string `json:"icon"`
+		Tooltip       *string `json:"tooltip"`
+		ParentID      *int32  `json:"parent_id"`
+		Position      *int32  `json:"position"`
+		IsActive      *bool   `json:"is_active"`
+		IsExternal    *bool   `json:"is_external"`
+		PermissionKey *string `json:"permission_key"`
+		CreatedAt     *string `json:"created_at"`
+		UpdatedAt     *string `json:"updated_at"`
+	}
+
+	UpdateMenus struct {
+		UpdateMenusRows []UpdateMenusRows `json:"upd_rows"`
+	}
+)

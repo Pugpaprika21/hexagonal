@@ -19,6 +19,6 @@ func NewDatabase(driver string) (IDbFactory, error) {
 	case "mysql":
 		return database.NewMySqlConnector(), nil
 	default:
-		return nil, errors.New("unsupported database type")
+		return nil, errors.New("unsupported database type " + driver)
 	}
 }
