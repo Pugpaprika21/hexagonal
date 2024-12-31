@@ -10,6 +10,7 @@ import (
 
 func (s *sysLeftBarMenusService) UpdateMenus(ctx context.Context, req []request.UpdateMenusRows) error {
 	var sql sqlx.Sqlx
+	var now string = sqlx.Now()
 	parmObj := make([]schema.UpdateMenus, len(req))
 
 	for i, rec := range req {
@@ -26,7 +27,7 @@ func (s *sysLeftBarMenusService) UpdateMenus(ctx context.Context, req []request.
 			IsActive:      sqlx.Nil(rec.IsActive),
 			IsExternal:    sqlx.Nil(rec.IsExternal),
 			PermissionKey: sqlx.Nil(rec.PermissionKey),
-			UpdatedAt:     sqlx.Nil(rec.UpdatedAt),
+			UpdatedAt:     sqlx.Nil(&now),
 		}
 
 		if *rec.ID != 0 {
