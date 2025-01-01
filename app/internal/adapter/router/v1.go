@@ -46,7 +46,29 @@ func (r *appRouter) v1() {
 
 		sysLeftbarMenus := v1.Group("/sysLeftbarMenus")
 		{
-			sysLeftbarMenus.GET("/getMainManus", r.handler.SysLeftBarMenus.GetMainManus)
+			sysLeftbarMenus.GET("/getMainManus", r.handler.SysLeftBarMenus.GetMainMenus)
+			sysLeftbarMenus.GET("/getAllMenus", r.handler.SysLeftBarMenus.GetAllMenus)
+			sysLeftbarMenus.POST("/createMenus", r.handler.SysLeftBarMenus.CreateMenus)
+			sysLeftbarMenus.POST("/updateMenus", r.handler.SysLeftBarMenus.UpdateMenus)
+			sysLeftbarMenus.POST("/deleteMenus", r.handler.SysLeftBarMenus.DeleteMenus)
+		}
+
+		mstParamsHdr := v1.Group("/mstParamsHdr")
+		{
+			mstParamsHdr.POST("/getMstParamsHdr", r.handler.MstParamsHdr.GetParamsHdr)
+			mstParamsHdr.POST("/lovParamsHdr", r.handler.MstParamsHdr.LovParamsHdr)
+			mstParamsHdr.POST("/createParamsHdr", r.handler.MstParamsHdr.CreateParamsHdr)
+			mstParamsHdr.POST("/updateParamsHdr", r.handler.MstParamsHdr.UpdateParamsHdr)
+			mstParamsHdr.POST("/deleteParamsHdr", r.handler.MstParamsHdr.DeleteParamsHdr)
+		}
+
+		mstParamsDtl := v1.Group("/mstParamsDtl")
+		{
+			mstParamsDtl.POST("/getParamsDtl", r.handler.MstParamsDtl.GetParamsDtl)
+			mstParamsDtl.POST("/lovParamsDtl", r.handler.MstParamsDtl.LovParamsDtl)
+			mstParamsDtl.POST("/createParamsDtl", r.handler.MstParamsDtl.CreateParamsDtl)
+			mstParamsDtl.POST("/updateParamsDtl", r.handler.MstParamsDtl.UpdateParamsDtl)
+			mstParamsDtl.POST("/deleteParamsDtl", r.handler.MstParamsDtl.DeleteParamsDtl)
 		}
 	}
 

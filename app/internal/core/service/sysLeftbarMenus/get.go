@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func (s *sysLeftBarMenusService) GetMainManus(ctx context.Context, req request.GetNewMainManus) ([]response.GetNewMainManus, error) {
+func (s *sysLeftBarMenusService) GetMainMenus(ctx context.Context, req request.GetNewMainManus) ([]response.GetNewMainManus, error) {
 	var sql sqlx.Sqlx
 	var resp []response.GetNewMainManus
 
@@ -59,7 +59,7 @@ func (s *sysLeftBarMenusService) GetMainManus(ctx context.Context, req request.G
 
 	sql.Stmt += ` order by p.position asc, s.position asc;`
 
-	rows, err := s.repos.GetMainManus(ctx, sql)
+	rows, err := s.repos.GetMainMenus(ctx, sql)
 	if err != nil {
 		return nil, err
 	}
@@ -84,6 +84,77 @@ func (s *sysLeftBarMenusService) GetMainManus(ctx context.Context, req request.G
 				UserID:          rec.UserID.Int32,
 				RoleID:          rec.RoleID.Int32,
 			}
+			resp = append(resp, data)
+		}
+	}
+
+	return resp, nil
+}
+
+func (s *sysLeftBarMenusService) GetAllMenus(ctx context.Context, req request.GetAllMenus) ([]response.GetAllMenus, error) {
+	var sql sqlx.Sqlx
+	var resp []response.GetAllMenus
+
+	sql.Stmt = `select id, user_id, role_id, name, url, icon, is_active from sys_leftbar_menus `
+
+	if req.UserID != nil && *req.UserID != 0 {
+		sql.WhereClause = append(sql.WhereClause, "user_id = ?")
+		sql.Args = append(sql.Args, req.UserID)
+	}
+
+	if req.RoleID != nil && *req.RoleID != 0 {
+		sql.WhereClause = append(sql.WhereClause, "role_id = ?")
+		sql.Args = append(sql.Args, req.RoleID)
+	}
+
+	sql.WhereClause = append(sql.WhereClause, "is_active = ?")
+	sql.Args = append(sql.Args, true)
+
+	if len(sql.WhereClause) > 0 {
+		sql.Stmt += " Where " + strings.Join(sql.WhereClause, " and ")
+	}
+
+	sql.Stmt += ` order by id asc;`
+
+	rows, err := s.repos.GetParentMenus(ctx, sql)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(rows) > 0 {
+		for _, rec := range rows {
+			sql.Stmt = `select name, url, icon, parent_id, is_active from sys_leftbar_menus where parent_id = ? and is_active = true`
+			sql.Args = append(sql.Args[:0], rec.ID)
+			childRows, err := s.repos.GetChildMenus(ctx, sql)
+			if err != nil {
+				return nil, err
+			}
+
+			data := response.GetAllMenus{
+				ID:       rec.ID.Int32,
+				UserID:   rec.UserID.Int32,
+				RoleID:   rec.RoleID.Int32,
+				Name:     rec.Name.String,
+				Url:      rec.Url.String,
+				Icon:     rec.Icon.String,
+				IsActive: rec.IsActive.Bool,
+			}
+
+			if len(childRows) > 0 {
+				var subMenus []response.GetAllMenus
+				for _, subRec := range childRows {
+					subMenu := response.GetAllMenus{
+						Name:     subRec.Name.String,
+						Url:      subRec.Url.String,
+						Icon:     subRec.Icon.String,
+						ParentID: subRec.ParentID.Int32,
+						IsActive: subRec.IsActive.Bool,
+					}
+					subMenus = append(subMenus, subMenu)
+				}
+				data.SubMenus = subMenus
+			}
+
 			resp = append(resp, data)
 		}
 	}
