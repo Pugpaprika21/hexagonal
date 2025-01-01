@@ -3,6 +3,8 @@ package service
 import (
 	"pugpaprika/app/internal/adapter/repository"
 	"pugpaprika/app/internal/core/service/migrations"
+	mstparamsdtl "pugpaprika/app/internal/core/service/mstParamsDtl"
+	mstparamshdr "pugpaprika/app/internal/core/service/mstParamsHdr"
 	sysleftbarmenus "pugpaprika/app/internal/core/service/sysLeftbarMenus"
 	users "pugpaprika/app/internal/core/service/users"
 	usersgroup "pugpaprika/app/internal/core/service/usersGroup"
@@ -15,6 +17,8 @@ type Service struct {
 	UsersGroupSetting usersgroupsetting.IUsersGroupSettingService
 	Migrations        migrations.IMigrationsService
 	SysLeftBarMenus   sysleftbarmenus.ISysLeftBarMenusService
+	MstParamsHdr      mstparamshdr.IMstParamsHdrService
+	MstParamsDtl      mstparamsdtl.IMstParamsDtlService
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -24,5 +28,7 @@ func NewService(repos *repository.Repository) *Service {
 		UsersGroupSetting: usersgroupsetting.NewUsersGroupSettingService(repos.UsersGroupSetting),
 		Migrations:        migrations.NewMigrationsService(repos.Migrations),
 		SysLeftBarMenus:   sysleftbarmenus.NewSysLeftBarMenusService(repos.SysLeftBarMenus),
+		MstParamsHdr:      mstparamshdr.NewMstParamsHdrService(repos.MstParamsHdr),
+		MstParamsDtl:      mstparamsdtl.NewMstParamsDtlService(repos.MstParamsDtl),
 	}
 }
