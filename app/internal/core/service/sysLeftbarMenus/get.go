@@ -10,7 +10,6 @@ import (
 
 func (s *sysLeftBarMenusService) GetMainMenus(ctx context.Context, req request.GetNewMainManus) ([]response.GetNewMainManus, error) {
 	var sql sqlx.Sqlx
-	var resp []response.GetNewMainManus
 
 	sql.Stmt = `
 	select 
@@ -64,27 +63,25 @@ func (s *sysLeftBarMenusService) GetMainMenus(ctx context.Context, req request.G
 		return nil, err
 	}
 
-	if len(rows) > 0 {
-		for _, rec := range rows {
-			data := response.GetNewMainManus{
-				MenuID:          rec.MenuID.Int32,
-				MenuName:        rec.MenuName.String,
-				MenuURL:         rec.MenuURL.String,
-				MenuIcon:        rec.MenuIcon.String,
-				MenuTooltip:     rec.MenuTooltip.String,
-				MenuPosition:    rec.MenuPosition.Int32,
-				MenuIsActive:    rec.MenuIsActive.Bool,
-				SubMenuID:       rec.SubMenuID.Int32,
-				SubMenuName:     rec.SubMenuName.String,
-				SubMenuURL:      rec.SubMenuURL.String,
-				SubMenuIcon:     rec.SubMenuIcon.String,
-				SubMenuTooltip:  rec.SubMenuTooltip.String,
-				SubMenuPosition: rec.SubMenuPosition.Int32,
-				SubMenuIsActive: rec.SubMenuIsActive.Bool,
-				UserID:          rec.UserID.Int32,
-				RoleID:          rec.RoleID.Int32,
-			}
-			resp = append(resp, data)
+	resp := make([]response.GetNewMainManus, len(rows))
+	for i, rec := range rows {
+		resp[i] = response.GetNewMainManus{
+			MenuID:          rec.MenuID.Int32,
+			MenuName:        rec.MenuName.String,
+			MenuURL:         rec.MenuURL.String,
+			MenuIcon:        rec.MenuIcon.String,
+			MenuTooltip:     rec.MenuTooltip.String,
+			MenuPosition:    rec.MenuPosition.Int32,
+			MenuIsActive:    rec.MenuIsActive.Bool,
+			SubMenuID:       rec.SubMenuID.Int32,
+			SubMenuName:     rec.SubMenuName.String,
+			SubMenuURL:      rec.SubMenuURL.String,
+			SubMenuIcon:     rec.SubMenuIcon.String,
+			SubMenuTooltip:  rec.SubMenuTooltip.String,
+			SubMenuPosition: rec.SubMenuPosition.Int32,
+			SubMenuIsActive: rec.SubMenuIsActive.Bool,
+			UserID:          rec.UserID.Int32,
+			RoleID:          rec.RoleID.Int32,
 		}
 	}
 
@@ -93,7 +90,6 @@ func (s *sysLeftBarMenusService) GetMainMenus(ctx context.Context, req request.G
 
 func (s *sysLeftBarMenusService) GetAllMenus(ctx context.Context, req request.GetAllMenus) ([]response.GetAllMenus, error) {
 	var sql sqlx.Sqlx
-	var resp []response.GetAllMenus
 
 	sql.Stmt = `select id, user_id, role_id, name, url, icon, is_active from sys_leftbar_menus `
 
@@ -121,41 +117,37 @@ func (s *sysLeftBarMenusService) GetAllMenus(ctx context.Context, req request.Ge
 		return nil, err
 	}
 
-	if len(rows) > 0 {
-		for _, rec := range rows {
-			sql.Stmt = `select name, url, icon, parent_id, is_active from sys_leftbar_menus where parent_id = ? and is_active = true`
-			sql.Args = append(sql.Args[:0], rec.ID)
-			childRows, err := s.repos.GetChildMenus(ctx, sql)
-			if err != nil {
-				return nil, err
-			}
+	resp := make([]response.GetAllMenus, len(rows))
+	for i, rec := range rows {
+		sql.Stmt = `select name, url, icon, parent_id, is_active from sys_leftbar_menus where parent_id = ? and is_active = true`
+		sql.Args = append(sql.Args[:0], rec.ID)
+		childRows, err := s.repos.GetChildMenus(ctx, sql)
+		if err != nil {
+			return nil, err
+		}
 
-			data := response.GetAllMenus{
-				ID:       rec.ID.Int32,
-				UserID:   rec.UserID.Int32,
-				RoleID:   rec.RoleID.Int32,
-				Name:     rec.Name.String,
-				Url:      rec.Url.String,
-				Icon:     rec.Icon.String,
-				IsActive: rec.IsActive.Bool,
-			}
+		resp[i] = response.GetAllMenus{
+			ID:       rec.ID.Int32,
+			UserID:   rec.UserID.Int32,
+			RoleID:   rec.RoleID.Int32,
+			Name:     rec.Name.String,
+			Url:      rec.Url.String,
+			Icon:     rec.Icon.String,
+			IsActive: rec.IsActive.Bool,
+		}
 
-			if len(childRows) > 0 {
-				var subMenus []response.GetAllMenus
-				for _, subRec := range childRows {
-					subMenu := response.GetAllMenus{
-						Name:     subRec.Name.String,
-						Url:      subRec.Url.String,
-						Icon:     subRec.Icon.String,
-						ParentID: subRec.ParentID.Int32,
-						IsActive: subRec.IsActive.Bool,
-					}
-					subMenus = append(subMenus, subMenu)
+		if len(childRows) > 0 {
+			subMenu := make([]response.GetAllMenus, len(childRows))
+			for j, subRec := range childRows {
+				subMenu[j] = response.GetAllMenus{
+					Name:     subRec.Name.String,
+					Url:      subRec.Url.String,
+					Icon:     subRec.Icon.String,
+					ParentID: subRec.ParentID.Int32,
+					IsActive: subRec.IsActive.Bool,
 				}
-				data.SubMenus = subMenus
 			}
-
-			resp = append(resp, data)
+			resp[i].SubMenus = subMenu
 		}
 	}
 
