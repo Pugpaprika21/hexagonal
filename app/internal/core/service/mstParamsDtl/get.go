@@ -10,7 +10,6 @@ import (
 
 func (m *mstParamsDtlService) GetParamsDtl(ctx context.Context, req request.GetParamsDtl) ([]response.GetParamsDtl, error) {
 	var sql sqlx.Sqlx
-	var resp []response.GetParamsDtl
 
 	sql.Stmt = `select param_id, paramkey_id, paramparent_id, paramkey_txt, param_code, param_nameth, param_nameeng, param_detail, param_order from mst_params_dtl `
 
@@ -58,27 +57,25 @@ func (m *mstParamsDtlService) GetParamsDtl(ctx context.Context, req request.GetP
 		return nil, err
 	}
 
-	if len(rows) > 0 {
-		for _, rec := range rows {
-			data := response.GetParamsDtl{
-				ParamID:       rec.ParamID.Int64,
-				ParamkeyID:    rec.ParamkeyID.Int32,
-				ParamparentID: rec.ParamparentID.Int32,
-				ParamkeyTxt:   rec.ParamkeyTxt.String,
-				ParamCode:     rec.ParamCode.String,
-				ParamNameth:   rec.ParamNameth.String,
-				ParamNameeng:  rec.ParamNameeng.String,
-				ParamDetail:   rec.ParamDetail.String,
-				ParamOrder:    rec.ParamOrder.Int32,
-				ParamhdrID:    rec.ParamhdrID.Int32,
-				IsActive:      rec.IsActive.Bool,
-				CreatedProgby: rec.CreatedProgby.String,
-				CreatedBy:     rec.CreatedBy.String,
-				UpdatedBy:     rec.UpdatedBy.String,
-				CreatedAt:     rec.CreatedAt.String,
-				UpdatedAt:     rec.UpdatedAt.String,
-			}
-			resp = append(resp, data)
+	resp := make([]response.GetParamsDtl, len(rows))
+	for i, rec := range rows {
+		resp[i] = response.GetParamsDtl{
+			ParamID:       rec.ParamID.Int64,
+			ParamkeyID:    rec.ParamkeyID.Int32,
+			ParamparentID: rec.ParamparentID.Int32,
+			ParamkeyTxt:   rec.ParamkeyTxt.String,
+			ParamCode:     rec.ParamCode.String,
+			ParamNameth:   rec.ParamNameth.String,
+			ParamNameeng:  rec.ParamNameeng.String,
+			ParamDetail:   rec.ParamDetail.String,
+			ParamOrder:    rec.ParamOrder.Int32,
+			ParamhdrID:    rec.ParamhdrID.Int32,
+			IsActive:      rec.IsActive.Bool,
+			CreatedProgby: rec.CreatedProgby.String,
+			CreatedBy:     rec.CreatedBy.String,
+			UpdatedBy:     rec.UpdatedBy.String,
+			CreatedAt:     rec.CreatedAt.String,
+			UpdatedAt:     rec.UpdatedAt.String,
 		}
 	}
 

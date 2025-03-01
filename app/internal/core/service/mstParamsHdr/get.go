@@ -10,7 +10,6 @@ import (
 
 func (m *mstParamsHdrService) GetParamsHdr(ctx context.Context, req request.GetParamsHdr) ([]response.GetParamsHdr, error) {
 	var sql sqlx.Sqlx
-	var resp []response.GetParamsHdr
 
 	sql.Stmt = `select param_id ,paramkey_txt ,param_code ,param_nameth ,param_nameeng ,param_detail ,param_order from mst_params_hdr `
 
@@ -43,25 +42,24 @@ func (m *mstParamsHdrService) GetParamsHdr(ctx context.Context, req request.GetP
 		return nil, err
 	}
 
-	if len(rows) > 0 {
-		for _, rec := range rows {
-			data := response.GetParamsHdr{
-				ParamID:       rec.ParamID.Int64,
-				ParamkeyTxt:   rec.ParamkeyTxt.String,
-				ParamCode:     rec.ParamCode.String,
-				ParamNameth:   rec.ParamNameth.String,
-				ParamNameeng:  rec.ParamNameeng.String,
-				ParamDetail:   rec.ParamDetail.String,
-				ParamOrder:    rec.ParamOrder.Int32,
-				IsActive:      rec.IsActive.Bool,
-				CreatedProgby: rec.CreatedProgby.String,
-				CreatedBy:     rec.CreatedBy.String,
-				UpdatedBy:     rec.UpdatedBy.String,
-				CreatedAt:     rec.CreatedAt.String,
-				UpdatedAt:     rec.UpdatedAt.String,
-			}
-			resp = append(resp, data)
+	resp := make([]response.GetParamsHdr, len(rows))
+	for i, rec := range rows {
+		resp[i] = response.GetParamsHdr{
+			ParamID:       rec.ParamID.Int64,
+			ParamkeyTxt:   rec.ParamkeyTxt.String,
+			ParamCode:     rec.ParamCode.String,
+			ParamNameth:   rec.ParamNameth.String,
+			ParamNameeng:  rec.ParamNameeng.String,
+			ParamDetail:   rec.ParamDetail.String,
+			ParamOrder:    rec.ParamOrder.Int32,
+			IsActive:      rec.IsActive.Bool,
+			CreatedProgby: rec.CreatedProgby.String,
+			CreatedBy:     rec.CreatedBy.String,
+			UpdatedBy:     rec.UpdatedBy.String,
+			CreatedAt:     rec.CreatedAt.String,
+			UpdatedAt:     rec.UpdatedAt.String,
 		}
+
 	}
 
 	return resp, nil

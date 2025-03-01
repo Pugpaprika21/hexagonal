@@ -10,25 +10,24 @@ import (
 
 func (u *usersGroupService) GetUsersGroup(ctx context.Context, req request.GetUsersGroup) ([]response.GetUsersGroup, error) {
 	var sql sqlx.Sqlx
-	var resp []response.GetUsersGroup
 
-	sql.Stmt = "select * from users_group"
-	if req.ID != 0 {
+	sql.Stmt = "select id, group_code, group_name, group_description from users_group"
+	if req.ID != nil && *req.ID != 0 {
 		sql.WhereClause = append(sql.WhereClause, "id = ?")
 		sql.Args = append(sql.Args, req.ID)
 	}
 
-	if req.GroupCode != "" {
+	if req.GroupCode != nil && *req.GroupCode != "" {
 		sql.WhereClause = append(sql.WhereClause, "group_code = ?")
 		sql.Args = append(sql.Args, req.GroupCode)
 	}
 
-	if req.GroupName != "" {
+	if req.GroupName != nil && *req.GroupName != "" {
 		sql.WhereClause = append(sql.WhereClause, "group_name = ?")
 		sql.Args = append(sql.Args, req.GroupName)
 	}
 
-	if req.GroupDescription != "" {
+	if req.GroupDescription != nil && *req.GroupDescription != "" {
 		sql.WhereClause = append(sql.WhereClause, "group_description = ?")
 		sql.Args = append(sql.Args, req.GroupDescription)
 	}
@@ -42,18 +41,13 @@ func (u *usersGroupService) GetUsersGroup(ctx context.Context, req request.GetUs
 		return nil, err
 	}
 
-	if len(rows) > 0 {
-		for _, rec := range rows {
-			data := response.GetUsersGroup{
-				ID:               int(rec.ID.Int64),
-				GroupCode:        rec.GroupCode.String,
-				GroupName:        rec.GroupName.String,
-				GroupDescription: rec.GroupDescription.String,
-				UpdatedAt:        rec.UpdatedAt.String,
-				CreatedAt:        rec.CreatedAt.String,
-				DeletedAt:        rec.DeletedAt.String,
-			}
-			resp = append(resp, data)
+	resp := make([]response.GetUsersGroup, len(rows))
+	for i, rec := range rows {
+		resp[i] = response.GetUsersGroup{
+			ID:               int(rec.ID.Int64),
+			GroupCode:        rec.GroupCode.String,
+			GroupName:        rec.GroupName.String,
+			GroupDescription: rec.GroupDescription.String,
 		}
 	}
 
